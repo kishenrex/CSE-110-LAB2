@@ -1,7 +1,7 @@
 import './App.css';
 import { Label, Note } from "./types"; // Import the Label type from the appropriate module
 import { dummyNotesList } from "./constants"; // Import the dummyNotesList from the appropriate module
-import { ClickCounter } from "./hooksExercise";
+import { ClickCounter, ToggleTheme } from "./hooksExercise";
 
 
 
@@ -32,7 +32,7 @@ function App() {
          </div>
        ))}
      </div>
-     {ClickCounter()}
+     {ToggleTheme()}
     </div>
  );
 }
