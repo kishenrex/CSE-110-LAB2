@@ -1,9 +1,7 @@
 import './App.css';
 import { Label, Note } from "./types"; // Import the Label type from the appropriate module
 import { dummyNotesList } from "./constants"; // Import the dummyNotesList from the appropriate module
-import { ClickCounter, ToggleTheme } from "./hooksExercise";
-
-
+import { ToggleTheme, LikeButton } from "./hooksExercise";
 
 function App() {
  return (
@@ -25,6 +23,10 @@ function App() {
            className="note-item">
            <div className="notes-header">
              <button>x</button>
+             <button onClick={() => {
+              note.favorite = !note.favorite;
+              console.log("favorite clicked")
+             }}>Like</button>
            </div>
            <h2> {note.title} </h2>
            <p> {note.content} </p>
@@ -33,9 +35,21 @@ function App() {
        ))}
      </div>
      {ToggleTheme()}
+     <div className="note-fav">
+      <h1>Favorites:</h1>
+      {dummyNotesList.map(note => {
+        if (note.favorite) {
+          return <li key={note.id}>{note.title}</li>;
+        } else {
+          return null; // Render nothing if not active
+        }
+      })}
+     </div>
     </div>
  );
 }
+
+
 
 export default App;
 

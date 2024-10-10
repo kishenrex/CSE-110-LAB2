@@ -6,9 +6,9 @@ import { ThemeContext, themes } from "./themeContext";
 export function ClickCounter() {
  const [count, setCount] = useState(0);
 
- const handleClick = () => {
-   setCount(count + 1);
- };
+//  const handleClick = () => {
+//    setCount(count + 1);
+//  };
 
  useEffect(() => {
    document.title = `You clicked ${count} times`;
@@ -53,7 +53,22 @@ export function ToggleTheme() {
     );
    }
    
-   export default ToggleTheme;
+//not used
+export function LikeButton() {
+    const [liked, setLiked] = useState(false);
+
+    const handleClick = () => {
+        setLiked(!liked);
+        //console.log(liked);
+    };
+
+
+    return (
+        <button onClick={handleClick}>
+            {liked ? 'Liked ❤️' : 'Not Liked 👎'}
+        </button>
+    )
+}
    
    
 
