@@ -54,21 +54,32 @@ export function ToggleTheme() {
    }
    
 //not used
-export function LikeButton() {
-    const [liked, setLiked] = useState(false);
 
-    const handleClick = () => {
-        setLiked(!liked);
-        //console.log(liked);
-    };
+// interface NoteProps {
+//   noteId: string;      // The ID of the note
+//   initialLikes: boolean; // whether it is liked or not
+// }
+
+// export function LikeButton({noteId, initialLikes}) {
+//     const [liked, setLiked] = useState(initialLikes);
+
+//     useEffect(() => {
+
+//     });
+
+//     const handleClick = () => {
+//         setLiked(!liked);
+//         //console.log(liked);
+//     };
 
 
-    return (
-        <button onClick={handleClick}>
-            {liked ? 'Liked ❤️' : 'Not Liked 👎'}
-        </button>
-    )
-}
+
+//     return (
+//         <button onClick={handleClick}>
+//             {liked ? 'Liked ❤️' : 'Not Liked 👎'}
+//         </button>
+//     )
+// }
    
    
 

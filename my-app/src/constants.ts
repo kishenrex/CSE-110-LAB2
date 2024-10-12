@@ -27,7 +27,7 @@ export const dummyNotesList = [
        title: "test note 4 title",
        content: "test note 4 content",
        label: Label.study,
-       favorite: true,
+       favorite: false,
    },
    {
        id: 5,
@@ -41,7 +41,7 @@ export const dummyNotesList = [
        title: "test note 6 title",
        content: "test note 6 content",
        label: Label.personal,
-       favorite: true,
+       favorite: false,
    },
 ]
 
