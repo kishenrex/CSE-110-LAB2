@@ -1,8 +1,8 @@
 import './App.css';
 import { Label, Note } from "./types"; // Import the Label type from the appropriate module
 import { dummyNotesList } from "./constants"; // Import the dummyNotesList from the appropriate module
-import { ToggleTheme } from "./hooksExercise";
 import React, { useState, useEffect, useContext } from 'react';
+import { ThemeContext, themes } from "./themeContext";
 
 function App() {
   const [notes, setNotes] = useState(dummyNotesList);
@@ -14,7 +14,7 @@ function App() {
     label: Label.other,
     favorite: false,
   };
-
+const [currentTheme, setCurrentTheme] = useState(themes.light);
 const [createNote, setCreateNote] = useState(initialNote);
 
 const createNoteHandler = (event: React.FormEvent) => {
@@ -38,14 +38,56 @@ const createNoteHandler = (event: React.FormEvent) => {
   setNotes(updatedNotes)
  }
 
+const theme = useContext(ThemeContext);
 
-  // const updateLikes = (Note) => {
-  //   setNotes(note.favorite = !note.favorite);
-  // };
+function Favorites() {
+
+  const theme = useContext(ThemeContext);
+  return (
+    <div className="note-fav" style={{
+      background: theme.background,
+      color: theme.foreground,
+     }}>
+      <h1 style={{
+        background: theme.background,
+        color: theme.foreground,
+       }}>Favorites:</h1>
+      {notes.map(note => {
+        if (note.favorite) {
+          return <li style={{
+            background: theme.background,
+            color: theme.foreground,
+           }} key={note.id}>{note.title} </li>;
+        } else {
+          return null; // Render nothing if not active
+        }
+      })}
+     </div>
+  );
+}
+
+function ToggleTheme() {
+  
+  const toggleTheme = () => {
+    setCurrentTheme(currentTheme === themes.light ? themes.dark : themes.light);
+  };
+   
+  return (
+    <ThemeContext.Provider value={currentTheme}>
+      <button onClick={toggleTheme}> Toggle Theme </button>
+      <Favorites />
+    </ThemeContext.Provider>
+  );
+  }
 
  return (
   
-  <div className='app-container'>
+  <div className='app-container'
+  // style={{
+  //   background: theme.background,
+  //   color: theme.foreground,
+  // }}
+  >
   	<form className="note-form" onSubmit={createNoteHandler}>
     	<div>
       	<input
@@ -87,9 +129,11 @@ const createNoteHandler = (event: React.FormEvent) => {
       	>
         	<div className="notes-header">
           	<button onClick={() => { handleDelete(note.id)
-            }}>x</button>
+            }}
+            style={{ background: theme.foreground, color: theme.background }}>x</button>
             <button onClick={() => { handleFav(note)
-            }}>♡</button>
+            }} 
+            style={{ background: theme.foreground, color: theme.background }}>♡</button>
         	</div>
         	<h2> {note.title} </h2>
           <p contentEditable="true"> {note.content} </p>
@@ -98,16 +142,6 @@ const createNoteHandler = (event: React.FormEvent) => {
     	))}
   	</div>
      {ToggleTheme()}
-     <div className="note-fav">
-      <h1>Favorites:</h1>
-      {notes.map(note => {
-        if (note.favorite) {
-          return <li key={note.id}>{note.title}</li>;
-        } else {
-          return null; // Render nothing if not active
-        }
-      })}
-     </div>
     </div>
  );
 }
